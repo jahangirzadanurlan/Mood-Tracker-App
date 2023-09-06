@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    include:
+      - db
+      - server
+      - security
+      - email
+      - oauth2
+      - rabbitMq

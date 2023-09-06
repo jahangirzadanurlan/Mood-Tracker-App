@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>PANAS Survey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #0073e6;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            text-align: center;
+            padding: 10px;
+        }
+        th {
+            background-color: #f3f3f3;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        input[type="submit"] {
+            background-color: #0073e6;
+            color: white;
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Positive and Negative Affect Schedule (PANAS-SF)</h1>
+<p><span th:text="${userEmail}"></span>, indicate the extent you have felt this way over the day.</p>
+
+<form action="/subscription/result" method="post">
+    <table>
+        <tr>
+            <th>PANAS</th>
+            <th>Very slightly or not at all</th>
+            <th>A little</th>
+            <th>Moderately</th>
+            <th>Quite a bit</th>
+            <th>Extremely</th>
+        </tr>
+
+        <!-- Interested -->
+        <tr>
+            <td>Interested</td>
+            <td><input type="radio" name="Interested" value="1"></td>
+            <td><input type="radio" name="Interested" value="2"></td>
+            <td><input type="radio" name="Interested" value="3"></td>
+            <td><input type="radio" name="Interested" value="4"></td>
+            <td><input type="radio" name="Interested" value="5"></td>
+        </tr>
+
+        <tr>
+            <td>Distressed</td>
+            <td><input type="radio" name="Distressed" value="1"></td>
+            <td><input type="radio" name="Distressed" value="2"></td>
+            <td><input type="radio" name="Distressed" value="3"></td>
+            <td><input type="radio" name="Distressed" value="4"></td>
+            <td><input type="radio" name="Distressed" value="5"></td>
+        </tr>
+
+        <tr>
+            <td>Excited</td>
+            <td><input type="radio" name="Excited" value="1"></td>
+            <td><input type="radio" name="Excited" value="2"></td>
+            <td><input type="radio" name="Excited" value="3"></td>
+            <td><input type="radio" name="Excited" value="4"></td>
+            <td><input type="radio" name="Excited" value="5"></td>
+        </tr>
+
+        <tr>
+            <td>Upset</td>
+            <td><input type="radio" name="Upset" value="1"></td>
+            <td><input type="radio" name="Upset" value="2"></td>
+            <td><input type="radio" name="Upset" value="3"></td>
+            <td><input type="radio" name="Upset" value="4"></td>
+            <td><input type="radio" name="Upset" value="5"></td>
+        </tr>
+
+        <tr>
+            <td>Strong</td>
+            <td><input type="radio" name="Strong" value="1"></td>
+            <td><input type="radio" name="Strong" value="2"></td>
+            <td><input type="radio" name="Strong" value="3"></td>
+            <td><input type="radio" name="Strong" value="4"></td>
+            <td><input type="radio" name="Strong" value="5"></td>
+        </tr>
+
+        <tr>
+            <td>Guilty</td>
+            <td><input type="radio" name="Guilty" value="1"></td>
+            <td><input type="radio" name="Guilty" value="2"></td>
+            <td><input type="radio" name="Guilty" value="3"></td>
+            <td><input type="radio" name="Guilty" value="4"></td>
+            <td><input type="radio" name="Guilty" value="5"></td>
+        </tr>
+
+        <tr>
+            <td>Scared</td>
+            <td><input type="radio" name="Scared" value="1"></td>
+            <td><input type="radio" name="Scared" value="2"></td>
+            <td><input type="radio" name="Scared" value="3"></td>
+            <td><input type="radio" name="Scared" value="4"></td>
+            <td><input type="radio" name="Scared" value="5"></td>
+        </tr>
+
+        <tr>
+            <td>Hostile</td>
+            <td><input type="radio" name="Hostile" value="1"></td>
+            <td><input type="radio" name="Hostile" value="2"></td>
+            <td><input type="radio" name="Hostile" value="3"></td>
+            <td><input type="radio" name="Hostile" value="4"></td>
+            <td><input type="radio" name="Hostile" value="5"></td>
+        </tr>
+
+        <tr>
+            <td>Enthusiastic</td>
+            <td><input type="radio" name="Enthusiastic" value="1"></td>
+            <td><input type="radio" name="Enthusiastic" value="2"></td>
+            <td><input type="radio" name="Enthusiastic" value="3"></td>
+            <td><input type="radio" name="Enthusiastic" value="4"></td>
+            <td><input type="radio" name="Enthusiastic" value="5"></td>
+        </tr>
+
+        <tr>
+            <td>Proud</td>
+            <td><input type="radio" name="Proud" value="1"></td>
+            <td><input type="radio" name="Proud" value="2"></td>
+            <td><input type="radio" name="Proud" value="3"></td>
+            <td><input type="radio" name="Proud" value="4"></td>
+            <td><input type="radio" name="Proud" value="5"></td>
+        </tr>
+
+        <tr>
+            <td>Irritable</td>
+            <td><input type="radio" name="Irritable" value="1"></td>
+            <td><input type="radio" name="Irritable" value="2"></td>
+            <td><input type="radio" name="Irritable" value="3"></td>
+            <td><input type="radio" name="Irritable" value="4"></td>
+            <td><input type="radio" name="Irritable" value="5"></td>
+        </tr>
+
+        <tr>
+            <td>Alert</td>
+            <td><input type="radio" name="Alert" value="1"></td>
+            <td><input type="radio" name="Alert" value="2"></td>
+            <td><input type="radio" name="Alert" value="3"></td>
+            <td><input type="radio" name="Alert" value="4"></td>
+            <td><input type="radio" name="Alert" value="5"></td>
+        </tr>
+
+        <tr>
+            <td>Ashamed</td>
+            <td><input type="radio" name="Ashamed" value="1"></td>
+            <td><input type="radio" name="Ashamed" value="2"></td>
+            <td><input type="radio" name="Ashamed" value="3"></td>
+            <td><input type="radio" name="Ashamed" value="4"></td>
+            <td><input type="radio" name="Ashamed" value="5"></td>
+        </tr>
+
+        <tr>
+            <td>Inspired</td>
+            <td><input type="radio" name="Inspired" value="1"></td>
+            <td><input type="radio" name="Inspired" value="2"></td>
+            <td><input type="radio" name="Inspired" value="3"></td>
+            <td><input type="radio" name="Inspired" value="4"></td>
+            <td><input type="radio" name="Inspired" value="5"></td>
+        </tr>
+
+        <tr>
+            <td>Nervous</td>
+            <td><input type="radio" name="Nervous" value="1"></td>
+            <td><input type="radio" name="Nervous" value="2"></td>
+            <td><input type="radio" name="Nervous" value="3"></td>
+            <td><input type="radio" name="Nervous" value="4"></td>
+            <td><input type="radio" name="Nervous" value="5"></td>
+        </tr>
+
+        <tr>
+            <td>Determined</td>
+            <td><input type="radio" name="Determined" value="1"></td>
+            <td><input type="radio" name="Determined" value="2"></td>
+            <td><input type="radio" name="Determined" value="3"></td>
+            <td><input type="radio" name="Determined" value="4"></td>
+            <td><input type="radio" name="Determined" value="5"></td>
+        </tr>
+
+        <tr>
+            <td>Attentive</td>
+            <td><input type="radio" name="Attentive" value="1"></td>
+            <td><input type="radio" name="Attentive" value="2"></td>
+            <td><input type="radio" name="Attentive" value="3"></td>
+            <td><input type="radio" name="Attentive" value="4"></td>
+            <td><input type="radio" name="Attentive" value="5"></td>
+        </tr>
+
+        <tr>
+            <td>Jittery</td>
+            <td><input type="radio" name="Jittery" value="1"></td>
+            <td><input type="radio" name="Jittery" value="2"></td>
+            <td><input type="radio" name="Jittery" value="3"></td>
+            <td><input type="radio" name="Jittery" value="4"></td>
+            <td><input type="radio" name="Jittery" value="5"></td>
+        </tr>
+
+        <tr>
+            <td>Active</td>
+            <td><input type="radio" name="Active" value="1"></td>
+            <td><input type="radio" name="Active" value="2"></td>
+            <td><input type="radio" name="Active" value="3"></td>
+            <td><input type="radio" name="Active" value="4"></td>
+            <td><input type="radio" name="Active" value="5"></td>
+        </tr>
+
+        <tr>
+            <td>Afraid</td>
+            <td><input type="radio" name="Afraid" value="1"></td>
+            <td><input type="radio" name="Afraid" value="2"></td>
+            <td><input type="radio" name="Afraid" value="3"></td>
+            <td><input type="radio" name="Afraid" value="4"></td>
+            <td><input type="radio" name="Afraid" value="5"></td>
+        </tr>
+    </table>
+
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>

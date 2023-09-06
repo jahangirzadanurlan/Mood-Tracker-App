@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>PANAS Result</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      color: #333366;
+      border-bottom: 2px solid #333366;
+    }
+    p {
+      font-size: 18px;
+      color: #333;
+    }
+    .score {
+      font-weight: bold;
+      font-size: 24px;
+      color: #0066cc;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>PANAS Survey Result</h1>
+
+  <p><strong>Positive Affect Score:</strong> <span class="score" th:text="${panasResultResponseDto.positiveAffectScore}"></span></p>
+  <p><strong>Negative Affect Score:</strong> <span class="score" th:text="${panasResultResponseDto.negativeAffectScore}"></span></p>
+  <p><strong>Z-Score for Positive Affect:</strong> <span class="score" th:text="${panasResultResponseDto.zScorePositive}"></span></p>
+  <p><strong>Z-Score for Negative Affect:</strong> <span class="score" th:text="${panasResultResponseDto.zScoreNegative}"></span></p>
+</div>
+
+</body>
+</html>

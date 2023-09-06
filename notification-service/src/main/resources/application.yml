@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    include:
+      - email
+      - server
+      - db
+      - rabbitMq
+      - resilience4j

@@ -1,0 +1,74 @@
+version: '2'
+services:
+  broker:
+    platform: linux/amd64
+    image: confluentinc/cp-kafka:6.1.0
+    container_name: broker
+    hostname: broker
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 100
+      TZ: Asia/Baku
+    networks:
+      - net
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+
+  zookeeper:
+    platform: linux/amd64
+    image: confluentinc/cp-zookeeper:6.1.0
+    container_name: zookeeper
+    hostname: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      TZ: Asia/Baku
+    networks:
+      - net
+
+#  schema-registry:
+#    platform: linux/amd64
+#    image: confluentinc/cp-schema-registry:6.1.0
+#    container_name: schema-registry
+#    hostname: schema-registry
+#    environment:
+#      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+#      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: zookeeper:2181
+#      TZ: Asia/Baku
+#    networks:
+#      - net
+#    ports:
+#      - "8083:8081"
+#    depends_on:
+#      - zookeeper
+#      - broker
+
+  kafka-drop:
+    platform: linux/amd64
+    image: obsidiandynamics/kafdrop
+    container_name: kafka-drop
+    hostname: kafka-drop
+    restart: "no"
+    environment:
+      KAFKA_BROKERCONNECT: "broker:29092"
+      JVM_OPTS: "-Xms16M -Xmx48M -Xss180K -XX:-TieredCompilation -XX:+UseStringDeduplication -noverify"
+      TZ: Asia/Baku
+    networks:
+      - net
+    ports:
+      - "9000:9000"
+    depends_on:
+      - "broker"
+
+networks:
+  net:

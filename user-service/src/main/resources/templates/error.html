@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Oopsie Daisy!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffebcd;
+        }
+        .error-container {
+            text-align: center;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 4em;
+            color: #ff4500;
+        }
+        p {
+            font-size: 1.2em;
+        }
+        img {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<div class="error-container">
+    <img src="https://emojiisland.com/cdn/shop/products/Emoji_Icon_-_Sad_Emoji_large.png?v=1571606093" alt="Sad Emoji" th:src="@{/images/sad-emoji.png}"/>
+    <h1>Oopsie Daisy! <span th:text="${status}">404</span></h1>
+    <p>Looks like something went terribly wrong!</p>
+    <p th:text="${message}">But don't worry, our ninjas are on it.</p>
+    <a href="/" th:href="@{/}">Take me home, I'm scared!</a>
+</div>
+</body>
+</html>

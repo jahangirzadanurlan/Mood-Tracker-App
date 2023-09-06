@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+        .container {
+            margin-top: 100px;
+        }
+        h1 {
+            color: #333366;
+            font-size: 50px;
+        }
+        p {
+            font-size: 20px;
+            color: #666666;
+        }
+        #time {
+            font-size: 24px;
+            color: #ff9900;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Welcome!, <span th:text="${username}">user</span>!</h1>
+    <p>Welcome to our app. We wish you a good time!</p>
+    <p id="time"></p>
+</div>
+
+<script>
+    function updateTime() {
+        const timeElement = document.getElementById('time');
+        const now = new Date();
+        const timeString = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
+        timeElement.innerHTML = 'Şu anki saat: ' + timeString;
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+</script>
+</body>
+</html>
