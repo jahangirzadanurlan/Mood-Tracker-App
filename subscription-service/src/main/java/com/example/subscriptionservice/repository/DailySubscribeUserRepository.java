@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DailySubscribeUserRepository extends JpaRepository<DailySubscribeUser,Long> {
+    DailySubscribeUser findDailySubscribeUserByEmail(String email);
 }

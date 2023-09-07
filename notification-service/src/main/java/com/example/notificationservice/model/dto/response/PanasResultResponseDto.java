@@ -1,4 +1,4 @@
-package com.example.subscriptionservice.model.dto.response;
+package com.example.notificationservice.model.dto.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

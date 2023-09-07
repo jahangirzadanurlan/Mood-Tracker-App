@@ -42,8 +42,7 @@
 
 <h1>Positive and Negative Affect Schedule (PANAS-SF)</h1>
 <p><span th:text="${userEmail}"></span>, indicate the extent you have felt this way over the day.</p>
-
-<form action="/subscription/result" method="post">
+<form th:action="@{/result/{userEmail}(userEmail=${userEmail})}" method="post">
     <table>
         <tr>
             <th>PANAS</th>

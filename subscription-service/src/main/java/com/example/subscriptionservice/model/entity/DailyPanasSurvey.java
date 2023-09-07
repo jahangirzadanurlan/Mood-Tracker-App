@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -14,7 +15,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PanasSurvey {
+public class DailyPanasSurvey {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -38,4 +39,6 @@ public class PanasSurvey {
     Integer Jittery;
     Integer Active;
     Integer Afraid;
+    String mail;
+    LocalDateTime createdDate;
 }

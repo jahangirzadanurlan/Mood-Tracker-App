@@ -1,6 +1,7 @@
 package com.example.notificationservice.service.impl;
 
 import com.example.notificationservice.model.dto.request.UserRegisterEmailRequestDto;
+import com.example.notificationservice.model.dto.response.PanasResultResponseDto;
 import com.example.notificationservice.model.entity.DailySubscribeUser;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
@@ -121,4 +122,39 @@ public class MailSenderService {
     }
 
 
+    public void sendWeeklyPanasAnalysis(DailySubscribeUser dailySubscribeUser) {
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, "utf-8");
+
+        try {
+            helper.setTo(dailySubscribeUser.getEmail());
+            helper.setSubject("Your Weekly PANAS Analysis is Ready!");
+
+            // URL to redirect the user
+            String link = "http://localhost:8084/subscription/week-result/" + dailySubscribeUser.getEmail();
+
+            String emailContent = "<html><body>"
+                    + "<div style='margin: 20px; padding: 20px; font-family: Arial, sans-serif;'>"
+                    + "<h2 style='color: #4CAF50;'>Hello!</h2>"
+                    + "<p>We're excited to share your weekly PANAS analysis with you. 👩‍⚕️🔍</p>"
+                    + "<p>To view your results and discover ways to improve your well-being, please click the button below:</p>"
+                    + "<div style='text-align: center;'>"
+                    + "<a style='background-color: #4CAF50; color: white; padding: 14px 30px; margin: 20px auto; border-radius: 5px; text-decoration: none;' href='" + link + "'>"
+                    + "View My Analysis 📊"
+                    + "</a>"
+                    + "</div>"
+                    + "<p>Best regards,<br>Your Well-Being Team </p>"
+                    + "</div>"
+                    + "</body></html>";
+
+            helper.setText(emailContent, true);
+
+            javaMailSender.send(message);
+            log.info("Email sent: " + dailySubscribeUser.getEmail());
+
+        } catch (Exception e) {
+            log.error("An error occurred while sending the email: {}", e.getMessage());
+            throw new RuntimeException("Email could not be sent");
+        }
+    }
 }

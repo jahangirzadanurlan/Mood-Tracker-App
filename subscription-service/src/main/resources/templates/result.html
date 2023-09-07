@@ -3,41 +3,146 @@
 <head>
   <title>PANAS Result</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background-color: #f9f9f9;
+    /* Your existing styles */
+    .happy-text {
+      color: green;
     }
-    h1 {
-      color: #333366;
-      border-bottom: 2px solid #333366;
+    .neutral-text {
+      color: orange;
     }
-    p {
-      font-size: 18px;
-      color: #333;
-    }
-    .score {
-      font-weight: bold;
-      font-size: 24px;
-      color: #0066cc;
-    }
-    .container {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    .sad-text {
+      color: red;
     }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>PANAS Survey Result</h1>
+  <h1>📊 PANAS Survey Result</h1>
 
-  <p><strong>Positive Affect Score:</strong> <span class="score" th:text="${panasResultResponseDto.positiveAffectScore}"></span></p>
-  <p><strong>Negative Affect Score:</strong> <span class="score" th:text="${panasResultResponseDto.negativeAffectScore}"></span></p>
-  <p><strong>Z-Score for Positive Affect:</strong> <span class="score" th:text="${panasResultResponseDto.zScorePositive}"></span></p>
-  <p><strong>Z-Score for Negative Affect:</strong> <span class="score" th:text="${panasResultResponseDto.zScoreNegative}"></span></p>
+  <p><strong>😄 Positive Affect Score:</strong> <span class="score happy-text" th:text="${panasResultResponseDto.positiveAffectScore}"></span></p>
+  <p><strong>☹️ Negative Affect Score:</strong> <span class="score sad-text" th:text="${panasResultResponseDto.negativeAffectScore}"></span></p>
+  <p><strong>📈 Z-Score for Positive Affect:</strong> <span class="score happy-text" th:text="${#numbers.formatDecimal(panasResultResponseDto.zScorePositive, 1, 2)}"></span></p>
+  <p><strong>📉 Z-Score for Negative Affect:</strong> <span class="score sad-text" th:text="${#numbers.formatDecimal(panasResultResponseDto.zScoreNegative, 1, 2)}"></span></p>
+
+  <!-- Positive Affect Suggestions -->
+  <div th:if="${panasResultResponseDto.positiveAffectScore <= 20}">
+    <h2 class="sad-text">🙁 Low Positive Affect Suggestions:</h2>
+    <h3>📚 Books:</h3>
+    <ul>
+      <li>"Man's Search for Meaning" - Viktor Frankl</li>
+      <li>"Feeling Good: The New Therapy" - David D. Burns</li>
+    </ul>
+    <h3>🏃‍♂️ Activities:</h3>
+    <ul>
+      <li>Go for a walk 🚶</li>
+      <li>Try mindfulness exercises 🧘‍♀️</li>
+    </ul>
+  </div>
+
+  <div th:if="${panasResultResponseDto.positiveAffectScore > 20 && panasResultResponseDto.positiveAffectScore <= 30}">
+    <h2>😊 Moderate Positive Affect Suggestions:</h2>
+    <h3>📚 Books:</h3>
+    <ul>
+      <li>"The Power of Now" - Eckhart Tolle</li>
+      <li>"Drive: The Surprising Truth About What Motivates Us" - Daniel H. Pink</li>
+    </ul>
+    <h3>🎨 Activities:</h3>
+    <ul>
+      <li>Pick up a hobby like painting or music 🎨🎵</li>
+      <li>Try a new recipe 🍲</li>
+    </ul>
+  </div>
+
+  <div th:if="${panasResultResponseDto.positiveAffectScore > 30 && panasResultResponseDto.positiveAffectScore <= 40}">
+    <h2>🌟 High Positive Affect Suggestions:</h2>
+    <h3>📚 Books:</h3>
+    <ul>
+      <li>📘 "Daring Greatly" - Brene Brown</li>
+      <li>📗 "Flow: The Psychology of Optimal Experience" - Mihaly Csikszentmihalyi</li>
+    </ul>
+    <h3>🎉 Activities:</h3>
+    <ul>
+      <li>🏀 Group activities (sports, games)</li>
+      <li>🌍 Making a travel plan or a short trip</li>
+    </ul>
+  </div>
+
+  <div th:if="${panasResultResponseDto.positiveAffectScore > 40}">
+    <h2>🎉 Very High Positive Affect Suggestions:</h2>
+    <h3>📚 Books:</h3>
+    <ul>
+      <li>📘 "The Happiness Advantage" - Shawn Achor</li>
+      <li>📗 "Grit: The Power of Passion and Perseverance" - Angela Duckworth</li>
+    </ul>
+    <h3>🎉 Activities:</h3>
+    <ul>
+      <li>🤲 Do volunteer work</li>
+      <li>🌐 Start learning a new language</li>
+    </ul>
+  </div>
+
+
+
+  <!-- Negative Affect Suggestions -->
+
+  <div th:if="${panasResultResponseDto.negativeAffectScore <= 20}">
+    <h2>😇 Low Negative Affect Suggestions:</h2>
+    <h3>📚 Books:</h3>
+    <ul>
+      <li>"The Happiness Hypothesis" - Jonathan Haidt</li>
+      <li>"Optimal Living 101" - Brian Johnson</li>
+    </ul>
+    <h3>🏋️‍♀️ Activities:</h3>
+    <ul>
+      <li>Continue your regular exercise routine 🏋️‍♀️</li>
+      <li>Spend quality time with loved ones 👨‍👩‍👧‍👦</li>
+    </ul>
+  </div>
+
+  <div th:if="${panasResultResponseDto.negativeAffectScore > 20 && panasResultResponseDto.negativeAffectScore <= 30}">
+    <h2>😐 Moderate Negative Affect Suggestions:</h2>
+    <h3>📚 Books:</h3>
+    <ul>
+      <li>📘 "Why Zebras Don't Get Ulcers" - Robert M. Sapolsky</li>
+      <li>📗 "10% Happier" - Dan Harris</li>
+    </ul>
+    <h3>🎭 Activities:</h3>
+    <ul>
+      <li>🗨️ Consider speaking to a counselor</li>
+      <li>🧘‍♀️ Try stress-reducing activities like yoga</li>
+    </ul>
+  </div>
+
+  <div th:if="${panasResultResponseDto.negativeAffectScore > 30 && panasResultResponseDto.negativeAffectScore <= 40}">
+    <h2>😦 High Negative Affect Suggestions:</h2>
+    <h3>📚 Books:</h3>
+    <ul>
+      <li>📘 "The Body Keeps the Score" - Bessel van der Kolk</li>
+      <li>📗 "Wherever You Go, There You Are" - Jon Kabat-Zinn</li>
+    </ul>
+    <h3>🎭 Activities:</h3>
+    <ul>
+      <li>👩‍⚕️ Visit a therapist</li>
+      <li>💊 Consider medication after professional consultation</li>
+    </ul>
+  </div>
+
+  <div th:if="${panasResultResponseDto.negativeAffectScore > 40}">
+    <h2>😰 Very High Negative Suggestions:</h2>
+    <h3>📚 Books:</h3>
+    <ul>
+      <li>📘 "The Noonday Demon: An Atlas of Depression" - Andrew Solomon</li>
+      <li>📗 "Stop Obsessing!: How to Overcome Your Obsessions and Compulsions" - Edna B. Foa</li>
+    </ul>
+    <h3>🎭 Activities:</h3>
+    <ul>
+      <li>🚑 Seeking emergency medical or psychological help</li>
+      <li>👥 Having a deep conversation with someone you trust</li>
+    </ul>
+  </div>
+
+
 </div>
 
 </body>

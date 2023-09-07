@@ -9,8 +9,16 @@ import org.springframework.kafka.config.TopicBuilder;
 public class TopicConfig {
 
     @Bean
-    public NewTopic newTopic(){
+    public NewTopic firstTopic(){
         return TopicBuilder.name("subscribe-topic")
+                .partitions(3)
+                .replicas(1)
+                .build();
+    }
+
+    @Bean
+    public NewTopic secondTopic(){
+        return TopicBuilder.name("report-topic")
                 .partitions(3)
                 .replicas(1)
                 .build();
