@@ -1,7 +1,6 @@
 package com.example.notificationservice.service.impl;
 
 import com.example.notificationservice.model.dto.request.UserRegisterEmailRequestDto;
-import com.example.notificationservice.model.dto.response.PanasResultResponseDto;
 import com.example.notificationservice.model.entity.DailySubscribeUser;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
@@ -157,4 +156,36 @@ public class MailSenderService {
             throw new RuntimeException("Email could not be sent");
         }
     }
+
+    @RabbitListener(queues = "sixthStepQueue")
+    public void sendPostSharingMail(String email){
+        log.info("sixthStepQueue send email to => {}",email);
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, "utf-8");
+
+        try {
+            helper.setTo(email);
+            helper.setSubject("🎉 Congratulations on Your New Post! 🎉");
+
+            String emailContent = "<html><body style='background-color: #f4f4f4; margin: 0; padding: 0;'>"
+                    + "<div style='max-width: 600px; margin: auto; padding: 20px; background-color: #fff; border-radius: 8px;'>"
+                    + "<h1 style='color: #333; text-align: center;'>Well Done! 🎉</h1>"
+                    + "<p style='font-size: 16px; color: #555;'>Congratulations on sharing your new post. Your voice matters and we're excited to see what you have to say.</p>"
+                    + "<hr style='border: none; border-top: 1px solid #ddd;'>"
+                    + "<p style='font-size: 16px; color: #555;'>Feel free to share more or engage with your community.</p>"
+                    + "<p style='font-size: 16px; color: #555; text-align: right;'>Best regards,<br>Nurlan Jahanirzada 😊</p>"
+                    + "</div>"
+                    + "</body></html>";
+
+            helper.setText(emailContent, true);
+
+            javaMailSender.send(message);
+            log.info("Email sent: " + email);
+
+        } catch (Exception e) {
+            log.error("An error occurred while sending the email: {}", e.getMessage());
+            throw new RuntimeException("Email could not be sent");
+        }
+    }
+
 }

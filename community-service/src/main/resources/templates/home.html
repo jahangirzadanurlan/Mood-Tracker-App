@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Virtual Health Consultant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        header h1 {
+            font-size: 2.5em;  /* Increase font size */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);  /* Add text shadow for depth */
+            margin: 0;  /* Remove default margin */
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+        }
+        header {
+            background-color: #1877f2;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            position: relative;
+        }
+        #posts {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .post-container {
+            background-color: white;
+            width: 60%;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .post-header, .post-content, .post-info {
+            margin: 16px;
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+        }
+        .username {
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        .fa {
+            color: #1877f2;
+        }
+        .post-content {
+            font-size: 16px;
+        }
+        .post-info {
+            color: #65676b;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .affect {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .positive-affect {
+            background-color: #daf1da;
+            color: #248724;
+        }
+        .negative-affect {
+            background-color: #f1dada;
+            color: #872424;
+        }
+        #shareButton {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            margin: 0;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        #shareButton i {
+            margin-right: 5px;
+        }
+        #chatButton {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            margin: 0;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        #chatButton i {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Your Community Service</h1>
+    <div id="chatButton" onclick="location.href='http://localhost:8085/community/chat'">
+        <i class="fa fa-comments"></i> Global Chat  <!-- Icon Added -->
+    </div>
+    <div id="shareButton" onclick="confirmAndPost()">
+        <i class="fa fa-bar-chart"></i> New Post  <!-- Icon Added -->
+    </div></header>
+
+<div id="posts">
+    <!-- Each Post -->
+    <div th:each="post : ${posts}" class="post-container">
+        <div class="post-header">
+            <i class="fa fa-user-circle fa-2x"></i>
+            <div class="username" th:text="${post.username}"></div>
+        </div>
+        <div class="post-content" th:text="${post.content}"></div>
+        <div class="post-info">
+            <!-- CSS classes are added here -->
+            <span class="affect positive-affect" th:text="'Positive Score: ' + ${post.weeklyPanasResultDto.positiveAffectScore}"></span>
+            <span class="affect negative-affect" th:text="'Negative Score: ' + ${post.weeklyPanasResultDto.negativeAffectScore}"></span>
+        </div>
+    </div>
+    <!-- End Each Post -->
+</div>
+
+
+<script>
+    function confirmAndPost() {  // Existing function
+        if (confirm("Are you sure you want to share last week's panas score?")) {
+            fetch('http://localhost:8081/post', {
+                method: 'POST',
+            }).then(response => {
+                if (response.ok) {  // Check if HTTP status code is in the 200-299 range
+                    return response.json();
+                } else {
+                    throw new Error('Failed to post data');
+                }
+            }).then(data => {
+                // Handle the response
+                alert("Geçen haftanın Panas skoru paylaşıldı");  // New alert
+            }).catch(error => {
+                console.error('Error:', error);  // Log any error to the console
+            });
+        }
+    }
+</script>
+
+</body>
+</html>

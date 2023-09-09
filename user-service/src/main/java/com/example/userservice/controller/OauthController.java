@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/oauth2")
-public class CommonController {
+public class OauthController {
 
 //    @GetMapping("/success")
 //    public String index(Model model, @AuthenticationPrincipal OAuth2User principal) {

@@ -1,12 +1,12 @@
 spring:
   application:
-    name: user-service
+    name: community-service
 
 server:
-  port: 8081
+  port: 8085
   servlet:
-    context-path: /user
-#
+    context-path: /community
+
 #eureka:
 #  client:
 #    serviceUrl:

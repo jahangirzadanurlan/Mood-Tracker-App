@@ -40,7 +40,7 @@ public class PanasController {
 
     @GetMapping("/week-result/{userEmail}")
     public String submitSurvey(@PathVariable String userEmail, Model model) {
-        Optional<WeeklyPanasSurvey> weeklyPanasSurvey = weeklyPanasSurveyRepository.findTopByUserEmailOrderByCreatedAtDesc(userEmail);
+        Optional<WeeklyPanasSurvey> weeklyPanasSurvey = weeklyPanasSurveyRepository.findFirstByEmailOrderByStartDateDesc(userEmail);
 
         model.addAttribute("panasResultResponseDto",
                 weeklyPanasSurvey.orElseThrow(() -> new EntityNotFoundException("No reports found for this email")));

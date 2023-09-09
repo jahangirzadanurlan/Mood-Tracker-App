@@ -2,16 +2,26 @@ package com.example.subscriptionservice.service;
 
 import com.example.subscriptionservice.model.dto.response.PanasResultResponseDto;
 import com.example.subscriptionservice.model.entity.DailyPanasSurvey;
+import com.example.subscriptionservice.model.entity.WeeklyPanasSurvey;
 import com.example.subscriptionservice.repository.DailyPanasSurveyRepository;
+import com.example.subscriptionservice.repository.WeeklyPanasSurveyRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class PanasService {
     private final DailyPanasSurveyRepository dailyPanasSurveyRepository;
+    private final WeeklyPanasSurveyRepository weeklyPanasSurveyRepository;
+    private final AmqpTemplate rabbitTemplate;
+    private final DirectExchange exchange;
 
     public String savePanas(DailyPanasSurvey dailyPanasSurvey, String userEmail){
         dailyPanasSurvey.setCreatedDate(LocalDateTime.now());
@@ -42,6 +52,16 @@ public class PanasService {
                 .zScorePositive(zScorePositive)
                 .email(survey.getMail())
                 .build();
+
+    }
+
+    @RabbitListener(queues = "fourthStepQueue")
+    public void findUserPanasScore(String userEmail){
+        log.info("user email(subs-service) => {}",userEmail);
+        WeeklyPanasSurvey weeklyPanasSurvey = weeklyPanasSurveyRepository.findFirstByEmailOrderByStartDateDesc(userEmail)
+                .orElseThrow(() -> new RuntimeException("Weekly Panas score not found for " + userEmail));
+
+        rabbitTemplate.convertAndSend(exchange.getName(),"fifthRoute",weeklyPanasSurvey);
 
     }
 

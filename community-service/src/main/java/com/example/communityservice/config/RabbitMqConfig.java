@@ -1,5 +1,6 @@
-package com.example.notificationservice.config;
+package com.example.communityservice.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -15,9 +16,6 @@ public class RabbitMqConfig {
     @Value("${rabbitmq.exchange}")
     String exchange;
 
-    @Value("${rabbitmq.queue}")
-    String queueName;
-
     @Value("${rabbitmq.routingKey}")
     String routingKey;
 
@@ -28,7 +26,7 @@ public class RabbitMqConfig {
 
     @Bean
     Queue firstStepQueue(){
-        return new Queue(queueName,false);
+        return new Queue("firstStepQueue",false);
     }
 
     @Bean
@@ -58,7 +56,7 @@ public class RabbitMqConfig {
 
     @Bean
     Binding binding(Queue firstStepQueue,DirectExchange exchange){
-        return BindingBuilder.bind(firstStepQueue).to(exchange).with(routingKey);
+        return BindingBuilder.bind(firstStepQueue).to(exchange).with("firstRoute");
     }
 
     @Bean
@@ -83,12 +81,13 @@ public class RabbitMqConfig {
 
     @Bean
     Binding sixthBinding(Queue sixthStepQueue,DirectExchange exchange){
-        return BindingBuilder.bind(sixthStepQueue).to(exchange).with("sixthRoute");
+        return BindingBuilder.bind(sixthStepQueue).to(exchange).with(routingKey);
     }
 
     @Bean
     MessageConverter jsonMessageConverter(){
-        return new Jackson2JsonMessageConverter();
+        ObjectMapper mapper = new ObjectMapper().findAndRegisterModules(); //Fixes an issue with LocalDateTime serialization
+        return new Jackson2JsonMessageConverter(mapper);
     }
 
 
