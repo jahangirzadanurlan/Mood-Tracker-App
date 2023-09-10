@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/community-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/community-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/notification-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/notification-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sentiment-analysis-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sentiment-analysis-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/subscription-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/subscription-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/user-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/user-service.main.iml" />
