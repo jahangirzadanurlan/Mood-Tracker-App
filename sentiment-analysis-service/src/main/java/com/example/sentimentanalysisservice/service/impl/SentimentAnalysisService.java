@@ -27,18 +27,18 @@ public class SentimentAnalysisService {
 
             String sentimentType = "";
             if(score <= 1) {
-                sentimentType = "Çok Olumsuz";
+                sentimentType = "Very Negative";
             } else if(score == 2) {
-                sentimentType = "Olumsuz";
+                sentimentType = "Negative";
             } else if(score == 3) {
-                sentimentType = "Nötr";
+                sentimentType = "Neutral";
             } else if(score == 4) {
-                sentimentType = "Olumlu";
+                sentimentType = "Positive";
             } else if(score >= 5) {
-                sentimentType = "Çok Olumlu";
+                sentimentType = "Very Positive";
             }
 
-            result.append("Cümle: ").append(sentence.toString()).append(", Duygu: ").append(sentimentType).append("\n").append(" score: ").append(score);
+            result.append("Sentence: ").append(sentence.toString()).append(", Sentiment: ").append(sentimentType).append("\n").append(" Score: ").append(score);
         }
 
         return result.toString();
