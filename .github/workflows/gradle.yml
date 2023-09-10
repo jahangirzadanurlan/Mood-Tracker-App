@@ -30,6 +30,14 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
+      - name: Grant execute permissions for gradlew files
+        run: |
+          chmod +x community-service/gradlew
+          chmod +x notification-service/gradlew
+          chmod +x sentiment-analysis-service/gradlew
+          chmod +x subscription-service/gradlew
+          chmod +x user-service/gradlew
+
       # Build community-service
       - name: Build community-service
         run: cd community-service && ./gradlew build
