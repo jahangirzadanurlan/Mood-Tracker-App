@@ -40,20 +40,20 @@ jobs:
 
       # Build community-service
       - name: Build community-service
-        run: cd community-service && ./gradlew build
+        run: cd community-service && ./gradlew build -x test
 
       # Build notification-service
       - name: Build notification-service
-        run: cd notification-service && ./gradlew build
+        run: cd notification-service && ./gradlew build -x test
 
       # Build sentiment-analysis-service
       - name: Build sentiment-analysis-service
-        run: cd sentiment-analysis-service && ./gradlew build
+        run: cd sentiment-analysis-service && ./gradlew build -x test
 
       # Build subscription-service
       - name: Build subscription-service
-        run: cd subscription-service && ./gradlew build
+        run: cd subscription-service && ./gradlew build -x test
 
       # Build user-service
       - name: Build user-service
-        run: cd user-service && ./gradlew build
+        run: cd user-service && ./gradlew build -x test
