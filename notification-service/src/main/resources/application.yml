@@ -6,3 +6,4 @@ spring:
       - db
       - rabbitMq
       - resilience4j
+      - eureka

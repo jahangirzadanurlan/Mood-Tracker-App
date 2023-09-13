@@ -1,17 +1,16 @@
 package com.example.communityservice.controller;
 
-        import com.example.communityservice.model.entity.Post;
-        import com.example.communityservice.repository.PostRepository;
-        import lombok.RequiredArgsConstructor;
-        import lombok.extern.slf4j.Slf4j;
-        import org.springframework.messaging.handler.annotation.MessageMapping;
-        import org.springframework.messaging.handler.annotation.SendTo;
-        import org.springframework.stereotype.Controller;
-        import org.springframework.ui.Model;
-        import org.springframework.web.bind.annotation.GetMapping;
-        import org.springframework.web.bind.annotation.PostMapping;
+import com.example.communityservice.model.entity.Post;
+import com.example.communityservice.repository.PostRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
-        import java.util.List;
+import java.util.List;
 
 @Controller
 @Slf4j

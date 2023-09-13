@@ -7,3 +7,4 @@ spring:
       - email
       - oauth2
       - rabbitMq
+      - eureka

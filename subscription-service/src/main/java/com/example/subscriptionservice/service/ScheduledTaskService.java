@@ -28,7 +28,7 @@ public class ScheduledTaskService {
     private final WeeklyPanasSurveyRepository weeklyPanasSurveyRepository;
     private final KafkaTemplate<String,DailySubscribeUser> kafkaTemplate;
 
-    @Scheduled(fixedRate = 20 * 60 * 1000) //Every day at 10PM //cron = "0 0 22 * * ?"
+    @Scheduled(cron = "0 0 22 * * ?") //Every day at 10PM
     public void sendPanasForm(){
         log.info("Schedule starting 571 ");
         List<DailySubscribeUser> allUser = dailySubscribeUserRepository.findAll();
@@ -46,7 +46,7 @@ public class ScheduledTaskService {
         }
     }
 
-    @Scheduled(fixedRate = 20 * 60 * 1000)//cron = "0 0 10 ? * SUN"
+    @Scheduled(cron = "0 0 10 ? * SUN")//Every sunday at 10PM
     public void weeklyAnalyze() {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime sevenDaysAgo = now.minusDays(7);

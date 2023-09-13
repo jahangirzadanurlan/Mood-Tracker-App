@@ -4,3 +4,4 @@ spring:
       - server
       - db
       - rabbitMq
+      - eureka
