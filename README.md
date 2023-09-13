@@ -1,5 +1,15 @@
 # Mood Tracker App
 
+## Table of Contents
+
+- [Features](#features-)
+- [Technologies Used](#technologies-used-)
+
+
+---
+
+## Features ✨
+
 ### 🎯 Problem Statement 🎯
 - Many people today face psychological problems such as stress, nervous reactions, and depression. These issues often lead to other complications.
 
@@ -20,4 +30,23 @@
 
 ### 📝 Sentiment Analysis 📝
 - Finally, the program can find the sentiment level (“Very Negative”,“Negative”,“Neutral”,“Positive”,“Very Positive”) of text in any language you enter.
+
+---
+
+## Technologies Used 🔨🔧\
+
+1.**Kafka** - A distributed streaming platform.
+2.**CI CD** - Continuous Integration and Continuous Delivery/Deployment.
+3. **OAuth2** - Secure authentication.
+4. **JWT** - Authentication and registration.
+5. **I18N** - Multilingual support (Russian, Azerbaijani, English, German).
+6. **Resilience4J** - Resilient and fault-tolerant architecture.
+7. **RabbitMQ** - Message queue for operations like email notifications and subscription handling.
+8. **Elasticsearch + Logstash + Kibana** - For powerful search and visualization capabilities.
+9. **Docker/docker-compose** - Containerization and orchestration.
+10. **Eureka Service/API Gateway** - Service discovery and routing.
+11. **Feign Client** - Simplifies HTTP API calls within the microservices.
+12. **Validation** - Robust validation mechanisms.
+13. **JPA/PostgreSQL** - Database management.
+14.**Spring Mail** - Provides functionalities for sending emails.
 
