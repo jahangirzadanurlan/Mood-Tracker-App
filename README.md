@@ -35,8 +35,8 @@
 
 ## Technologies Used 🔨🔧\
 
-1.**Kafka** - A distributed streaming platform.
-2.**CI CD** - Continuous Integration and Continuous Delivery/Deployment.
+1. **Kafka** - A distributed streaming platform.
+2. **CI CD** - Continuous Integration and Continuous Delivery/Deployment.
 3. **OAuth2** - Secure authentication.
 4. **JWT** - Authentication and registration.
 5. **I18N** - Multilingual support (Russian, Azerbaijani, English, German).
@@ -48,5 +48,7 @@
 11. **Feign Client** - Simplifies HTTP API calls within the microservices.
 12. **Validation** - Robust validation mechanisms.
 13. **JPA/PostgreSQL** - Database management.
-14.**Spring Mail** - Provides functionalities for sending emails.
+14. **Spring Mail** - Provides functionalities for sending emails.
+
+
 
